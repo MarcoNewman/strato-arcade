@@ -4,7 +4,7 @@ Strato-Arcade
 Pixy Test Script
 POC: Marco Newman
 """
-import datetime
+from datetime import datetime
 from __future__ import print_function
 import pixy2.build.python_demos.pixy as pixy
 from ctypes import *
