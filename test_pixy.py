@@ -4,6 +4,7 @@ Strato-Arcade
 Pixy Test Script
 POC: Marco Newman
 """
+import datetime
 from __future__ import print_function
 import pixy2.build.python_demos.pixy as pixy
 from ctypes import *
@@ -47,5 +48,5 @@ while 1:
       block_height = blocks[index].m_height
 
       print(f'[BLOCK: SIG={sig:d} X={block_x:3d} Y={block_y:3d} WIDTH={block_width:3d} HEIGHT={block_height:3d}]')
-      with open(f"/home/pi/BIRST/logs/HiFi_logs_{t}.csv", "a") as log:
+      with open(f"/home/pi/BIRST/logs/Pixy_Blocks.csv", "a") as log:
         log.write(f"{time_now}, {sig:d}, {block_x:3d}, {block_y:3d}, {block_width:3d}, {block_height:3d}\n")
