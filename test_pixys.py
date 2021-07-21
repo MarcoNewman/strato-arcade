@@ -47,6 +47,12 @@ pixy.set_lamp(1, 1, 1)
 pixy.set_lamp(1, 1, 2)
 
 def main():
+  global t
+  global pixy1_blocks
+  global pixy2_blocks
+  global pixy1_frame
+  global pixy2_frame
+
   # Time Check for 1/60s WAITING
   time_previous = datetime.datetime.now()
   while 1:
