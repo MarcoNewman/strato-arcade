@@ -40,6 +40,10 @@ pixy2_blocks = BlockArray(100)
 pixy1_frame = 0
 pixy2_frame = 0
 
+# Turn Pixy LEDs ON
+pixy.set_lamp(1, 1, 1)
+pixy.set_lamp(1, 1, 2)
+
 # Time Check for 1/60s WAITING
 time_previous = datetime.datetime.now()
 while 1:
@@ -85,3 +89,7 @@ while 1:
           log.write(f"{time}, {pixy_id:d}, {signature_id:d}, {block_x:3d}, {block_y:3d}, {block_width:3d}, {block_height:3d}\n")
 
   time_previous = time_now
+
+# Turn Pixy LEDs OFF
+pixy.set_lamp(0, 0, 1)
+pixy.set_lamp(0, 0, 2)
