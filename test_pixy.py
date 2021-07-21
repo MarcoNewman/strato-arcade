@@ -13,7 +13,7 @@ print("Pixy2 Python Test -- Get/Save Blocks")
 
 # Initialize Data Stores
 # |time|block_id|block_x|block_y|block_width|block_height| - Pixy_Logs
-with open(f"/home/pi/BIRST/logs/Pixy_{t}.csv", "w") as log:
+with open(f"/home/pi/BIRST/logs/Pixy_Blocks.csv", "w") as log:
   log.write("time, block_id, block_x, block_y, block_width, block_height\n")
 
 pixy.init ()
