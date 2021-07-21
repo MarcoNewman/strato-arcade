@@ -41,11 +41,11 @@ pixy1_frame = 0
 pixy2_frame = 0
 
 # Time Check for 1/60s WAITING
-time_previous = datetime.now()
+time_previous = datetime.datetime.now()
 while 1:
-  time_now = datetime.now()
+  time_now = datetime.datetime.now()
   while (time_now - time_previous < datetime.timedelta(seconds=1/30)):
-    time_now = datetime.now()
+    time_now = datetime.datetime.now()
   
   # Check both pixys for track blocks
   for pixy_id in [1,2]:
