@@ -40,7 +40,13 @@ pixy2_blocks = BlockArray(100)
 pixy1_frame = 0
 pixy2_frame = 0
 
+# Time Check for 1/60s WAITING
+time_previous = datetime.now()
 while 1:
+  time_now = datetime.now()
+  while (time_now - time_previous < datetime.timedelta(seconds=1/30)):
+    time_now = datetime.now()
+  
   # Check both pixys for track blocks
   for pixy_id in [1,2]:
     if pixy_id == 1:
@@ -50,12 +56,12 @@ while 1:
 
     if count > 0:
       # Blocks detected -> update frame count and timestamp
-      time_now = datetime.now()
+      time = datetime.now()
       if pixy_id == 1:
-        print(f'PixyID: {pixy_id} | Frame: {pixy1_frame} | {time_now}')
+        print(f'PixyID: {pixy_id} | Frame: {pixy1_frame} | {time}')
         pixy1_frame = pixy1_frame + 1
       else:
-        print(f'PixyID: {pixy_id} | Frame: {pixy2_frame} | {time_now}')
+        print(f'PixyID: {pixy_id} | Frame: {pixy2_frame} | {time}')
         pixy2_frame = pixy2_frame + 1
 
       # Read block position data and size
@@ -76,4 +82,6 @@ while 1:
         # Report block data
         print(f'[BLOCK: SIG={signature_id:d} X={block_x:3d} Y={block_y:3d} WIDTH={block_width:3d} HEIGHT={block_height:3d}]')
         with open(f"/home/pi/BIRST/logs/Pixy2s_{t}.csv", "a") as log:
-          log.write(f"{time_now}, {pixy_id:d}, {signature_id:d}, {block_x:3d}, {block_y:3d}, {block_width:3d}, {block_height:3d}\n")
+          log.write(f"{time}, {pixy_id:d}, {signature_id:d}, {block_x:3d}, {block_y:3d}, {block_width:3d}, {block_height:3d}\n")
+
+  time_previous = time_now
