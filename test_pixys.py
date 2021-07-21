@@ -4,13 +4,13 @@ Strato-Arcade
 Multi-Pixy Test Script
 POC: Marco Newman
 """
-from datetime import datetime, timedelta
+import datetime
 import pixy2.build.python_demos.pixy as pixy
 from ctypes import *
 from pixy2.build.python_demos.pixy import *
 
 print("Multiple Pixy2 Python Test -- Get/Save Blocks")
-t='{:%Y%m%d-%H%M%S}'.format(datetime.now())
+t='{:%Y%m%d-%H%M%S}'.format(datetime.datetime.now())
 
 # Initialize log data store
 # |time|pixy_id|signature_id|block_x|block_y|block_width|block_height| - Pixy_Logs
