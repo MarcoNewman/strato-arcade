@@ -13,7 +13,9 @@ print("Pixy2 Python Test -- Get/Save Blocks")
 
 # Initialize Data Stores
 # |time|block_id|block_x|block_y|block_width|block_height| - Pixy_Logs
-with open(f"/home/pi/BIRST/logs/Pixy_Blocks.csv", "w") as log:
+with open(f"/home/pi/BIRST/logs/Pixy1_Blocks.csv", "w") as log:
+  log.write("time, pixy_id, signature, block_x, block_y, block_width, block_height\n")
+with open(f"/home/pi/BIRST/logs/Pixy2_Blocks.csv", "w") as log:
   log.write("time, pixy_id, signature, block_x, block_y, block_width, block_height\n")
 
 a = pixy.init (1)
@@ -46,7 +48,7 @@ while 1:
 
     if count > 0:
       time_now = datetime.now()
-      print(f'frame {frame}: {time_now}')
+      print(f'PixyID: {pixy_id} | Frame: {frame} | {time_now}')
       frame = frame + 1
       for index in range (0, count):
         if pixy_id == 1:
