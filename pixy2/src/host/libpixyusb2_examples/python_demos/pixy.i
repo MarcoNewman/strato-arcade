@@ -22,7 +22,7 @@
 
 
 %inline %{
-extern int init();
+extern int init(int instance);
 
 
 
@@ -31,7 +31,7 @@ extern int init();
   @param[in]   program_name  "color_connected_components"  Block detection program
                              "line"                        Line feature detection program
 */
-extern int change_prog (const char *  program_name);
+extern int change_prog (const char *  program_name, int instance);
 
 /*!
   @brief       Gets the Pixy sensor frame width.
@@ -51,7 +51,7 @@ extern int get_frame_height ();
   @param[out]  blocks      Address to copy the blocks data.
   @return      Number of blocks copied to 'blocks'.
 */
-extern int ccc_get_blocks (int  max_blocks, BlockArray *  blocks);
+extern int ccc_get_blocks (int  max_blocks, BlockArray *  blocks, int instance);
 
 extern void line_get_all_features ();
 
@@ -81,7 +81,7 @@ extern int line_get_vectors (int max_vectors, VectorArray *  vectors);
 */
 extern int line_get_barcodes (int  max_barcodes, BarcodeArray *  barcodes);
 
-extern void set_lamp (int upper, int lower);
+extern void set_lamp (int upper, int lower, int instance);
 
 /*!
   @brief       Set servo position

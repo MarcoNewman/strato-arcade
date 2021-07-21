@@ -236,12 +236,12 @@ def BarcodeArray_frompointer(t):
 BarcodeArray_frompointer = _pixy.BarcodeArray_frompointer
 
 
-def init():
-    return _pixy.init()
+def init(instance):
+    return _pixy.init(instance)
 init = _pixy.init
 
-def change_prog(program_name):
-    return _pixy.change_prog(program_name)
+def change_prog(program_name, instance):
+    return _pixy.change_prog(program_name, instance)
 change_prog = _pixy.change_prog
 
 def get_frame_width():
@@ -252,8 +252,8 @@ def get_frame_height():
     return _pixy.get_frame_height()
 get_frame_height = _pixy.get_frame_height
 
-def ccc_get_blocks(max_blocks, blocks):
-    return _pixy.ccc_get_blocks(max_blocks, blocks)
+def ccc_get_blocks(max_blocks, blocks, instance):
+    return _pixy.ccc_get_blocks(max_blocks, blocks, instance)
 ccc_get_blocks = _pixy.ccc_get_blocks
 
 def line_get_all_features():
@@ -276,8 +276,8 @@ def line_get_barcodes(max_barcodes, barcodes):
     return _pixy.line_get_barcodes(max_barcodes, barcodes)
 line_get_barcodes = _pixy.line_get_barcodes
 
-def set_lamp(upper, lower):
-    return _pixy.set_lamp(upper, lower)
+def set_lamp(upper, lower, instance):
+    return _pixy.set_lamp(upper, lower, instance)
 set_lamp = _pixy.set_lamp
 
 def set_servos(S1_Position, S2_Position):
