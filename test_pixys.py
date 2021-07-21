@@ -56,7 +56,7 @@ while 1:
 
     if count > 0:
       # Blocks detected -> update frame count and timestamp
-      time = datetime.now()
+      time = datetime.datetime.now()
       if pixy_id == 1:
         print(f'PixyID: {pixy_id} | Frame: {pixy1_frame} | {time}')
         pixy1_frame = pixy1_frame + 1
