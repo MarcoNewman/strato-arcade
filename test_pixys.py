@@ -16,9 +16,11 @@ print("Pixy2 Python Test -- Get/Save Blocks")
 with open(f"/home/pi/BIRST/logs/Pixy_Blocks.csv", "w") as log:
   log.write("time, pixy_id, signature, block_x, block_y, block_width, block_height\n")
 
-pixy.init (1)
+a = pixy.init (1)
+print(f"Pixy1 Initialized: {a}")
 pixy.change_prog ("color_connected_components", 1)
-pixy.init (2)
+b = pixy.init (2)
+print(f"Pixy2 Initialized: {b}")
 pixy.change_prog ("color_connected_components", 2)
 
 class Blocks (Structure):
