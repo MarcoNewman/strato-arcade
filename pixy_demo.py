@@ -1,5 +1,5 @@
 from __future__ import print_function
-import pixy 
+import pixy2.build.python_demos.pixy as pixy
 from ctypes import *
 from pixy import *
 
