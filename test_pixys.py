@@ -4,7 +4,7 @@ Strato-Arcade
 Multi-Pixy Test Script
 POC: Marco Newman
 """
-import datetime
+from datetime import datetime, timedelta
 import pixy2.build.python_demos.pixy as pixy
 from ctypes import *
 from pixy2.build.python_demos.pixy import *
