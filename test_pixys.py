@@ -44,7 +44,7 @@ pixy2_frame = 0
 time_previous = datetime.datetime.now()
 while 1:
   time_now = datetime.datetime.now()
-  while (time_now - time_previous < datetime.timedelta(seconds=1/30)):
+  while (time_now - time_previous < datetime.timedelta(seconds=1/20)):
     time_now = datetime.datetime.now()
   
   # Check both pixys for track blocks
