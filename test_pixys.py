@@ -4,6 +4,8 @@ Strato-Arcade
 Multi-Pixy Test Script
 POC: Marco Newman
 """
+import sys
+import os
 import datetime
 import pixy2.build.python_demos.pixy as pixy
 from ctypes import *
@@ -44,52 +46,63 @@ pixy2_frame = 0
 pixy.set_lamp(1, 1, 1)
 pixy.set_lamp(1, 1, 2)
 
-# Time Check for 1/60s WAITING
-time_previous = datetime.datetime.now()
-while 1:
-  time_now = datetime.datetime.now()
-  while (time_now - time_previous < datetime.timedelta(seconds=1/20)):
+def main():
+  # Time Check for 1/60s WAITING
+  time_previous = datetime.datetime.now()
+  while 1:
     time_now = datetime.datetime.now()
-  
-  # Check both pixys for track blocks
-  for pixy_id in [1,2]:
-    if pixy_id == 1:
-      count = pixy.ccc_get_blocks (100, pixy1_blocks, pixy_id)
-    else:
-      count = pixy.ccc_get_blocks (100, pixy2_blocks, pixy_id)
-
-    if count > 0:
-      # Blocks detected -> update frame count and timestamp
-      time = datetime.datetime.now()
+    while (time_now - time_previous < datetime.timedelta(seconds=1/20)):
+      time_now = datetime.datetime.now()
+    
+    # Check both pixys for track blocks
+    for pixy_id in [1,2]:
       if pixy_id == 1:
-        print(f'PixyID: {pixy_id} | Frame: {pixy1_frame} | {time}')
-        pixy1_frame = pixy1_frame + 1
+        count = pixy.ccc_get_blocks (100, pixy1_blocks, pixy_id)
       else:
-        print(f'PixyID: {pixy_id} | Frame: {pixy2_frame} | {time}')
-        pixy2_frame = pixy2_frame + 1
+        count = pixy.ccc_get_blocks (100, pixy2_blocks, pixy_id)
 
-      # Read block position data and size
-      for index in range (0, count):
+      if count > 0:
+        # Blocks detected -> update frame count and timestamp
+        time = datetime.datetime.now()
         if pixy_id == 1:
-          signature_id = pixy1_blocks[index].m_signature
-          block_x = pixy1_blocks[index].m_x
-          block_y = pixy1_blocks[index].m_y
-          block_width = pixy1_blocks[index].m_width
-          block_height = pixy1_blocks[index].m_height
+          print(f'PixyID: {pixy_id} | Frame: {pixy1_frame} | {time}')
+          pixy1_frame = pixy1_frame + 1
         else:
-          signature_id = pixy2_blocks[index].m_signature
-          block_x = pixy2_blocks[index].m_x
-          block_y = pixy2_blocks[index].m_y
-          block_width = pixy2_blocks[index].m_width
-          block_height = pixy2_blocks[index].m_height
+          print(f'PixyID: {pixy_id} | Frame: {pixy2_frame} | {time}')
+          pixy2_frame = pixy2_frame + 1
 
-        # Report block data
-        print(f'[BLOCK: SIG={signature_id:d} X={block_x:3d} Y={block_y:3d} WIDTH={block_width:3d} HEIGHT={block_height:3d}]')
-        with open(f"/home/pi/BIRST/logs/Pixy2s_{t}.csv", "a") as log:
-          log.write(f"{time}, {pixy_id:d}, {signature_id:d}, {block_x:3d}, {block_y:3d}, {block_width:3d}, {block_height:3d}\n")
+        # Read block position data and size
+        for index in range (0, count):
+          if pixy_id == 1:
+            signature_id = pixy1_blocks[index].m_signature
+            block_x = pixy1_blocks[index].m_x
+            block_y = pixy1_blocks[index].m_y
+            block_width = pixy1_blocks[index].m_width
+            block_height = pixy1_blocks[index].m_height
+          else:
+            signature_id = pixy2_blocks[index].m_signature
+            block_x = pixy2_blocks[index].m_x
+            block_y = pixy2_blocks[index].m_y
+            block_width = pixy2_blocks[index].m_width
+            block_height = pixy2_blocks[index].m_height
 
-  time_previous = time_now
+          # Report block data
+          print(f'[BLOCK: SIG={signature_id:d} X={block_x:3d} Y={block_y:3d} WIDTH={block_width:3d} HEIGHT={block_height:3d}]')
+          with open(f"/home/pi/BIRST/logs/Pixy2s_{t}.csv", "a") as log:
+            log.write(f"{time}, {pixy_id:d}, {signature_id:d}, {block_x:3d}, {block_y:3d}, {block_width:3d}, {block_height:3d}\n")
 
-# Turn Pixy LEDs OFF
-pixy.set_lamp(0, 0, 1)
-pixy.set_lamp(0, 0, 2)
+    # Set time for next loop iteration
+    time_previous = time_now
+
+if __name__ == '__main__':
+  try:
+    main()
+  except KeyboardInterrupt:
+    print('Interrupted')
+    # Turn Pixy LEDs OFF
+    pixy.set_lamp(0, 0, 1)
+    pixy.set_lamp(0, 0, 2)
+    try:
+      sys.exit(0)
+    except SystemExit:
+      os._exit(0)
