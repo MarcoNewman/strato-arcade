@@ -104,7 +104,7 @@ if __name__ == '__main__':
   try:
     main()
   except KeyboardInterrupt:
-    print('Interrupted')
+    print(' Interrupted')
     # Turn Pixy LEDs OFF
     pixy.set_lamp(0, 0, 1)
     pixy.set_lamp(0, 0, 2)
