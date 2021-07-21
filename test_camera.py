@@ -14,8 +14,9 @@ t='{:%Y%m%d-%H%M%S}'.format(datetime.now())
 cam.resolution = (1920,1080)
 
 # Start Recording - Pi Camera V2
-cam.start_recording(f"/home/pi/vid_{t}.yuv420")
-
+print('Starting Recording')
+cam.start_recording(f"/home/pi/vid_{t}.h264")
+print('Recording...')
 # Record for 10 Seconds
 time.sleep(10)
 
