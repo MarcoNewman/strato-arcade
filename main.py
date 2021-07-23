@@ -135,9 +135,9 @@ def main():
       # Reset Loop Counter
       loop_counter = 0
 
-  # Increment loop counter and time log
-  loop_counter = loop_counter + 1
-  time_previous = time_now
+    # Increment loop counter and time log
+    loop_counter += 1
+    time_previous = time_now
 
 
 def query_pixys():
