@@ -84,7 +84,6 @@ def main():
   time_previous = datetime.datetime.now()
   loop_counter = 0
   while 1:
-    print(loop_counter)
     # Get current loop time
     time_now = datetime.datetime.now()
 
@@ -130,7 +129,7 @@ def main():
     # Restart Recording - Pi Camera V2
     if (loop_counter == 300): # 10 seconds
       cam.stop_recording()
-      cam.start_recording(f"/home/pi/BIRST/videos/{t}/{time_now}.h264")
+      cam.start_recording(f"/home/pi/BIRST/videos/{t}/{'{:%Y%m%d-%H%M%S}'.format(time_now)}.h264")
 
       # Reset Loop Counter
       loop_counter = 0
