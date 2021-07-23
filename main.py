@@ -136,7 +136,7 @@ def main():
       loop_counter = 0
 
   # Increment loop counter and time log
-  loop_counter += 1
+  loop_counter = loop_counter + 1
   time_previous = time_now
 
 
