@@ -35,7 +35,7 @@ print('Recording...')
 # |time|acc_x|acc_y|acc_z|humidity|temperature_external|pressure|temperature_internal| - Sensor Logs
 with open(f"/home/pi/BIRST/logs/{t}_pixys.csv", "w") as log:
   log.write("time, pixy_id, signature_id, block_x, block_y, block_width, block_height\n")
-with open(f"/home/pi/BIRSTlogs/{t}_sensors.csv", "w") as log:
+with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "w") as log:
   log.write("time, acc_x, acc_y, acc_z, humidity, temperature_external, pressure, temperature_internal\n")
 
 # Initialize I2C
