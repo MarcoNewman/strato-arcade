@@ -5,9 +5,9 @@ Flight Script
 POC: Marco Newman
 """
 
-import board
-import adafruit_shtc3
-import digitalio
+#import board
+#import adafruit_shtc3
+#import digitalio
 import sys
 import os
 import datetime
