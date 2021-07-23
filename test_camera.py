@@ -12,7 +12,7 @@ from picamera import PiCamera
 cam = PiCamera()
 t='{:%Y%m%d-%H%M%S}'.format(datetime.now())
 cam.resolution = (1920,1080)
-cam.framerate = 30
+cam.framerate = 24
 
 # Start Recording - Pi Camera V2
 print('Starting Recording')
