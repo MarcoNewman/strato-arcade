@@ -35,7 +35,7 @@ print('Recording...')
 # |time|acc_x|acc_y|acc_z|humidity|temperature_external|pressure|temperature_internal| - Sensor Logs
 with open(f"/home/pi/BIRST/logs/{t}_pixys.csv", "w") as log:
   log.write("time, pixy_id, signature_id, block_x, block_y, block_width, block_height\n")
-with open(f"/home/pi/{t}_sensors.csv", "w") as log:
+with open(f"/home/pi/logs/{t}_sensors.csv", "w") as log:
   log.write("time, acc_x, acc_y, acc_z, humidity, temperature_external, pressure, temperature_internal\n")
 
 # Initialize I2C
@@ -100,7 +100,7 @@ def main():
       #acc_x, acc_y, acc_z = lis3dh.acceleration
       
       # Write accelerometer data
-      # with open("/home/pi/logs/{t}_sensor.csv", "a") as log:
+      # with open("/home/pi/logs/{t}_sensors.csv", "a") as log:
       #   log.write(f"{time_now}, {acc_x}, {acc_y}, {acc_z}")
       #   if (loop_counter % 150 == 0): # 5 seconds
       #     log.write(',')
@@ -121,7 +121,7 @@ def main():
       #temperature_internal = dps310.temperature
 
       # Write sensor data
-      # with open("/home/pi/logs/{t}_sensor.csv", "a") as log:
+      # with open("/home/pi/logs/{t}_sensors.csv", "a") as log:
       #   log.write(f"{humidity}, {temperature_external}, {pressure}, {temperature_internal}\n")
     
     # Restart Recording - Pi Camera V2
