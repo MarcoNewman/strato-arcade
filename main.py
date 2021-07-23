@@ -84,6 +84,7 @@ def main():
   time_previous = datetime.datetime.now()
   loop_counter = 0
   while 1:
+    print(loop_counter)
     # Get current loop time
     time_now = datetime.datetime.now()
 
@@ -93,6 +94,8 @@ def main():
 
     # Query Pixy2 blocks
     pixy_data = query_pixys()
+    with open(f"/home/pi/BIRST/logs/{t}_pixys.csv", "a") as log:
+      log.write(pixy_data)
 
     # Query Accelerometer
     if (loop_counter % 3 == 0): # 1/10 seconds
