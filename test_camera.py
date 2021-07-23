@@ -15,7 +15,7 @@ cam.resolution = (1920,1080)
 
 # Start Recording - Pi Camera V2
 print('Starting Recording')
-cam.start_recording(f"/home/pi/BIRST/videos/{t}.yuv", "yuv")
+cam.start_recording(f"/home/pi/BIRST/videos/{t}.yuv420", "yuv")
 print('Recording...')
 # Record for 10 Seconds
 time.sleep(10)

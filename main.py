@@ -4,15 +4,21 @@ Strato-Arcade
 Flight Script
 POC: Marco Newman
 """
+
 import board
 import adafruit_shtc3
 import digitalio
-from datetime import datetime
+import sys
+import os
+import datetime
+import pixy2.build.python_demos.pixy as pixy
+from ctypes import *
+from pixy2.build.python_demos.pixy import *
 from picamera import PiCamera
 
 # Initialize Pi Camera V2
 cam = PiCamera()
-t='{:%Y%m%d-%H%M%S}'.format(datetime.now())
+t='{:%Y%m%d-%H%M%S}'.format(datetime.datetime.now())
 cam.resolution = (1920,1080)
 
 # Start Recording - Pi Camera V2
