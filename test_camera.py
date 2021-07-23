@@ -19,7 +19,7 @@ print('Starting Recording')
 cam.start_recording(f"/home/pi/BIRST/videos/{t}.h264")
 print('Recording...')
 # Record for 10 Seconds
-time.sleep(10)
+time.sleep(20)
 
 # Stop Camera Recording
 cam.stop_recording()
