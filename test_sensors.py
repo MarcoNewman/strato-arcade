@@ -7,6 +7,8 @@ POC: Marco Newman
 
 import board
 import adafruit_shtc3
+import adafruit_lis3dh
+import adafruit_dps310
 import digitalio
 import sys
 import os
