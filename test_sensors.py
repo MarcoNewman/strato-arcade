@@ -6,9 +6,9 @@ POC: Marco Newman
 """
 
 import board
-import adafruit_shtc3
 import adafruit_lis3dh
 import adafruit_dps310
+import adafruit_shtc3
 import digitalio
 import sys
 import os
@@ -30,7 +30,7 @@ int1 = digitalio.DigitalInOut(board.D6)  # Set this to the correct pin for the i
 lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
 
 # Initialize Temperature + Pressure Sensor
-#dps310 = adafruit_dps310.DPS310(i2c, address=)
+dps310 = adafruit_dps310.DPS310(i2c)
 
 # Initialize Temperature + Humidity Sensor
 sht = adafruit_shtc3.SHTC3(i2c)
@@ -65,9 +65,9 @@ def main():
     # Query Enviornmental Sensors
     if (loop_counter % 150 == 0): # 5 seconds
       # Query Temperature + Pressure Sensor
-      #pressure = dps310.pressure
-      #temperature_internal = dps310.temperature
-      #print(f"Pressure Sensor Data: pressure-{pressure}, temperature-{temperature_internal}")
+      pressure = dps310.pressure
+      temperature_internal = dps310.temperature
+      print(f"Pressure Sensor Data: pressure-{pressure}, temperature-{temperature_internal}")
 
       # Query Temperature + Humidity Sensor
       humidity = sht.relative_humidity
