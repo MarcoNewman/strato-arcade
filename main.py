@@ -51,8 +51,8 @@ dps310.sea_level_pressure = 1013.25
 int1 = digitalio.DigitalInOut(board.D6)  # Set this to the correct pin for the interrupt!
 lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
 
-# Initialize Temperature + Pressure Sensor
-dps310 = adafruit_dps310.DPS310(i2c)
+# Initialize Temperature + Humidity Sensor
+shtc3 = adafruit_shtc3.SHTC3(i2c)
 
 # Initialize Pixy2s
 a = pixy.init (1)
@@ -121,8 +121,8 @@ def main():
       print(f"Pressure Sensor Data: altitude-{altitude}, temperature-{temperature_internal}")
 
       # Query Temperature + Humidity Sensor
-      humidity = sht.relative_humidity
-      temperature_external = sht.temperature
+      humidity = shtc3.relative_humidity
+      temperature_external = shtc3.temperature
       print(f"Humidity Sensor Data: humidity-{humidity}, temperature-{temperature_external}")
 
       # Write sensor data
