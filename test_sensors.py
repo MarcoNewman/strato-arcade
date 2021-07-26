@@ -18,9 +18,9 @@ import datetime
 t='{:%Y%m%d-%H%M%S}'.format(datetime.datetime.now())
 
 # Initialize log data store
-# |time|acc_x|acc_y|acc_z|humidity|temperature_external|pressure|temperature_internal| - Sensor Logs
+# |time|acc_x|acc_y|acc_z|humidity|temperature_external|altitude|temperature_internal| - Sensor Logs
 with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "w") as log:
-  log.write("time, acc_x, acc_y, acc_z, humidity, temperature_external, pressure, temperature_internal\n")
+  log.write("time, acc_x, acc_y, acc_z, humidity, temperature_external, altitude, temperature_internal\n")
 
 # Initialize I2C
 i2c = board.I2C()
@@ -31,6 +31,7 @@ lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
 
 # Initialize Temperature + Pressure Sensor
 dps310 = adafruit_dps310.DPS310(i2c)
+dps310.sea_level_pressure = 1013.25
 
 # Initialize Temperature + Humidity Sensor
 sht = adafruit_shtc3.SHTC3(i2c)
@@ -65,9 +66,9 @@ def main():
     # Query Enviornmental Sensors
     if (loop_counter == 60): # 2 seconds
       # Query Temperature + Pressure Sensor
-      pressure = dps310.pressure
+      altitude = dps310.altitude
       temperature_internal = dps310.temperature
-      print(f"Pressure Sensor Data: pressure-{pressure}, temperature-{temperature_internal}")
+      print(f"Pressure Sensor Data: altitude-{altitude}, temperature-{temperature_internal}")
 
       # Query Temperature + Humidity Sensor
       humidity = sht.relative_humidity
@@ -76,7 +77,7 @@ def main():
 
       # Write sensor data
       with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
-        log.write(f"{humidity}, {temperature_external}, {pressure}, {temperature_internal}\n")
+        log.write(f"{humidity}, {temperature_external}, {altitude}, {temperature_internal}\n")
 
       # Reset Loop Counter
       loop_counter = 0
