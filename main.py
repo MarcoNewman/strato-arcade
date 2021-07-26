@@ -90,7 +90,7 @@ def main():
     time_now = datetime.datetime.now()
 
     # 1/30s loop interval
-    while (time_now - time_previous < datetime.timedelta(seconds=1/20)):
+    while (time_now - time_previous < datetime.timedelta(seconds=1/30)):
       time_now = datetime.datetime.now()
 
     # Query Pixy2 blocks
@@ -106,14 +106,14 @@ def main():
       # Write accelerometer data
       with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
         log.write(f"{time_now}, {acc_x}, {acc_y}, {acc_z}")
-        if (loop_counter % 150 == 0): # 5 seconds
+        if (loop_counter % 60 == 0): # 2 seconds
           log.write(',')
         else:
           log.write('\n')
     
 
     # Query Enviornmental Sensors
-    if (loop_counter % 150 == 0): # 5 seconds
+    if (loop_counter % 60 == 0): # 2 seconds
       # Query Temperature + Pressure Sensor
       pressure = dps310.pressure
       temperature_internal = dps310.temperature
