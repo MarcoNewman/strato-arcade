@@ -34,17 +34,18 @@ print('Recording...')
 
 # Initialize log data store
 # |time|pixy_id|signature_id|block_x|block_y|block_width|block_height| - Pixy2 Logs
-# |time|acc_x|acc_y|acc_z|humidity|temperature_external|pressure|temperature_internal| - Sensor Logs
+# |time|acc_x|acc_y|acc_z|humidity|temperature_external|altitude|temperature_internal| - Sensor Logs
 with open(f"/home/pi/BIRST/logs/{t}_pixys.csv", "w") as log:
   log.write("time, pixy_id, signature_id, block_x, block_y, block_width, block_height\n")
 with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "w") as log:
-  log.write("time, acc_x, acc_y, acc_z, humidity, temperature_external, pressure, temperature_internal\n")
+  log.write("time, acc_x, acc_y, acc_z, humidity, temperature_external, altitude, temperature_internal\n")
 
 # Initialize I2C
 i2c = board.I2C()
 
 # Initialize Temperature + Humidity Sensor
-sht = adafruit_shtc3.SHTC3(i2c)
+dps310 = adafruit_dps310.DPS310(i2c)
+dps310.sea_level_pressure = 1013.25
 
 # Initialize Accelerometer
 int1 = digitalio.DigitalInOut(board.D6)  # Set this to the correct pin for the interrupt!
@@ -115,9 +116,9 @@ def main():
     # Query Enviornmental Sensors
     if (loop_counter % 60 == 0): # 2 seconds
       # Query Temperature + Pressure Sensor
-      pressure = dps310.pressure
+      altitude = dps310.altitude
       temperature_internal = dps310.temperature
-      print(f"Pressure Sensor Data: pressure-{pressure}, temperature-{temperature_internal}")
+      print(f"Pressure Sensor Data: altitude-{altitude}, temperature-{temperature_internal}")
 
       # Query Temperature + Humidity Sensor
       humidity = sht.relative_humidity
@@ -125,8 +126,8 @@ def main():
       print(f"Humidity Sensor Data: humidity-{humidity}, temperature-{temperature_external}")
 
       # Write sensor data
-      with open("/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
-        log.write(f"{humidity}, {temperature_external}, {pressure}, {temperature_internal}\n")
+      with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
+        log.write(f"{humidity}, {temperature_external}, {altitude}, {temperature_internal}\n")
     
     # Restart Recording - Pi Camera V2
     if (loop_counter == 300): # 10 seconds
