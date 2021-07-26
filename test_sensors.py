@@ -75,7 +75,7 @@ def main():
       print(f"Humidity Sensor Data: humidity-{humidity}, temperature-{temperature_external}")
 
       # Write sensor data
-      with open("/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
+      with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
         log.write(f"{humidity}, {temperature_external}, {pressure}, {temperature_internal}\n")
 
       # Reset Loop Counter
