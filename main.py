@@ -5,12 +5,14 @@ Flight Script
 POC: Marco Newman
 """
 
-#import board
-#import adafruit_shtc3
-#import digitalio
 import sys
 import os
 import datetime
+import board
+import adafruit_lis3dh
+import adafruit_dps310
+import adafruit_shtc3
+import digitalio
 import pixy2.build.python_demos.pixy as pixy
 from ctypes import *
 from pixy2.build.python_demos.pixy import *
@@ -39,17 +41,17 @@ with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "w") as log:
   log.write("time, acc_x, acc_y, acc_z, humidity, temperature_external, pressure, temperature_internal\n")
 
 # Initialize I2C
-#i2c = board.I2C()
+i2c = board.I2C()
 
 # Initialize Temperature + Humidity Sensor
-#sht = adafruit_shtc3.SHTC3(i2c)
+sht = adafruit_shtc3.SHTC3(i2c)
 
 # Initialize Accelerometer
-#int1 = digitalio.DigitalInOut(board.D6)  # Set this to the correct pin for the interrupt!
-#lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
+int1 = digitalio.DigitalInOut(board.D6)  # Set this to the correct pin for the interrupt!
+lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
 
 # Initialize Temperature + Pressure Sensor
-#dps310 = adafruit_dps310.DPS310(i2c)
+dps310 = adafruit_dps310.DPS310(i2c)
 
 # Initialize Pixy2s
 a = pixy.init (1)
@@ -98,33 +100,33 @@ def main():
 
     # Query Accelerometer
     if (loop_counter % 3 == 0): # 1/10 seconds
-      print("<ACCELEROMETER DATA>")
-      #acc_x, acc_y, acc_z = lis3dh.acceleration
+      acc_x, acc_y, acc_z = lis3dh.acceleration
+      print(f"Accelerometer Data: x-{acc_x}, y-{acc_y}, z-{acc_z}")
       
       # Write accelerometer data
-      # with open("/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
-      #   log.write(f"{time_now}, {acc_x}, {acc_y}, {acc_z}")
-      #   if (loop_counter % 150 == 0): # 5 seconds
-      #     log.write(',')
-      #   else:
-      #     log.write('\n')
+      with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
+        log.write(f"{time_now}, {acc_x}, {acc_y}, {acc_z}")
+        if (loop_counter % 150 == 0): # 5 seconds
+          log.write(',')
+        else:
+          log.write('\n')
     
 
     # Query Enviornmental Sensors
     if (loop_counter % 150 == 0): # 5 seconds
-      # Query Humidity + Temperature Sensor
-      print("<HUMIDITY/TEMPERATURE DATA")
-      #humidity = sht.relative_humidity
-      #temperature_external = sht.temperature
-      
-      # Query Pressure + Temperature Sensor
-      print("<PRESSURE/TEMPERATURE DATA")
-      #pressure = dps310.pressure
-      #temperature_internal = dps310.temperature
+      # Query Temperature + Pressure Sensor
+      pressure = dps310.pressure
+      temperature_internal = dps310.temperature
+      print(f"Pressure Sensor Data: pressure-{pressure}, temperature-{temperature_internal}")
+
+      # Query Temperature + Humidity Sensor
+      humidity = sht.relative_humidity
+      temperature_external = sht.temperature
+      print(f"Humidity Sensor Data: humidity-{humidity}, temperature-{temperature_external}")
 
       # Write sensor data
-      # with open("/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
-      #   log.write(f"{humidity}, {temperature_external}, {pressure}, {temperature_internal}\n")
+      with open("/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
+        log.write(f"{humidity}, {temperature_external}, {pressure}, {temperature_internal}\n")
     
     # Restart Recording - Pi Camera V2
     if (loop_counter == 300): # 10 seconds

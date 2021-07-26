@@ -54,7 +54,7 @@ def main():
       print(f"Accelerometer Data: x-{acc_x}, y-{acc_y}, z-{acc_z}")
       
       # Write accelerometer data
-      with open("/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
+      with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
         log.write(f"{time_now}, {acc_x}, {acc_y}, {acc_z}")
         if (loop_counter % 150 == 0): # 5 seconds
           log.write(',')
