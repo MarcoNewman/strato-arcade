@@ -49,6 +49,7 @@ def main():
     # Query Accelerometer
     if (loop_counter % 3 == 0): # 1/10 seconds
       acc_x, acc_y, acc_z = lis3dh.acceleration
+      print(f"Accelerometer Data: x-{acc_x}, y-{acc_y}, z-{acc_z}")
       
       # Write accelerometer data
       with open("/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
@@ -64,11 +65,13 @@ def main():
       # Query Temperature + Pressure Sensor
       pressure = dps310.pressure
       temperature_internal = dps310.temperature
+      print(f"Pressure Sensor Data: pressure-{pressure}, temperature-{temperature_internal}")
 
       # Query Temperature + Humidity Sensor
       humidity = sht.relative_humidity
       temperature_external = sht.temperature
-      
+      print(f"Humidity Sensor Data: humidity-{humidity}, temperature-{temperature_external}")
+
       # Write sensor data
       with open("/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
         log.write(f"{humidity}, {temperature_external}, {pressure}, {temperature_internal}\n")
