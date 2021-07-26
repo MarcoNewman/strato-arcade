@@ -30,10 +30,10 @@ int1 = digitalio.DigitalInOut(board.D6)  # Set this to the correct pin for the i
 lis3dh = adafruit_lis3dh.LIS3DH_I2C(i2c, int1=int1)
 
 # Initialize Temperature + Pressure Sensor
-dps310 = adafruit_dps310.DPS310(i2c)
+dps310 = adafruit_dps310.DPS310_I2C(i2c)
 
 # Initialize Temperature + Humidity Sensor
-sht = adafruit_shtc3.SHTC3(i2c)
+sht = adafruit_shtc3.SHTC3_I2C(i2c)
 
 def main():
   global t
