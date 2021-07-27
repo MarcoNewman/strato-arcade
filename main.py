@@ -102,7 +102,7 @@ def main():
     # Query Accelerometer
     if (loop_counter % 3 == 0): # 1/10 seconds
       acc_x, acc_y, acc_z = lis3dh.acceleration
-      print(f"Accelerometer Data: x-{acc_x}, y-{acc_y}, z-{acc_z}")
+      #print(f"Accelerometer Data: x-{acc_x}, y-{acc_y}, z-{acc_z}")
       
       # Write accelerometer data
       with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
@@ -118,12 +118,12 @@ def main():
       # Query Temperature + Pressure Sensor
       altitude = dps310.altitude
       temperature_internal = dps310.temperature
-      print(f"Pressure Sensor Data: altitude-{altitude}, temperature-{temperature_internal}")
+      #print(f"Pressure Sensor Data: altitude-{altitude}, temperature-{temperature_internal}")
 
       # Query Temperature + Humidity Sensor
       humidity = shtc3.relative_humidity
       temperature_external = shtc3.temperature
-      print(f"Humidity Sensor Data: humidity-{humidity}, temperature-{temperature_external}")
+      #print(f"Humidity Sensor Data: humidity-{humidity}, temperature-{temperature_external}")
 
       # Write sensor data
       with open(f"/home/pi/BIRST/logs/{t}_sensors.csv", "a") as log:
@@ -160,10 +160,10 @@ def query_pixys():
       # Blocks detected -> update frame count and timestamp
       time = datetime.datetime.now()
       if pixy_id == 1:
-        print(f'PixyID: {pixy_id} | Frame: {pixy1_frame} | {time}')
+        #print(f'PixyID: {pixy_id} | Frame: {pixy1_frame} | {time}')
         pixy1_frame = pixy1_frame + 1
       else:
-        print(f'PixyID: {pixy_id} | Frame: {pixy2_frame} | {time}')
+        #print(f'PixyID: {pixy_id} | Frame: {pixy2_frame} | {time}')
         pixy2_frame = pixy2_frame + 1
 
       # Read block position data and size
@@ -182,7 +182,7 @@ def query_pixys():
           block_height = pixy2_blocks[index].m_height
 
         # Report block data
-        print(f'[BLOCK: SIG={signature_id:d} X={block_x:3d} Y={block_y:3d} WIDTH={block_width:3d} HEIGHT={block_height:3d}]')
+        #print(f'[BLOCK: SIG={signature_id:d} X={block_x:3d} Y={block_y:3d} WIDTH={block_width:3d} HEIGHT={block_height:3d}]')
         pixy_data += f"{time}, {pixy_id:d}, {signature_id:d}, {block_x:3d}, {block_y:3d}, {block_width:3d}, {block_height:3d}\n"
   
   # Return all formated block data
