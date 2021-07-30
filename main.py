@@ -132,10 +132,6 @@ def main():
     # Restart Recording - Pi Camera V2
     if (loop_counter == 300): # 10 seconds
       cam.stop_recording()
-      cam.resolution = (3280,2464)
-      cam.capture(f"/home/pi/BIRST/pictures/{t}/{'{:%Y%m%d-%H%M%S}'.format(time_now)}.jpg")
-      cam.resolution = (1920,1080)
-      cam.framerate = 30
       cam.start_recording(f"/home/pi/BIRST/videos/{t}/{'{:%Y%m%d-%H%M%S}'.format(time_now)}.h264")
 
       # Reset Loop Counter
