@@ -28,6 +28,7 @@ cam.framerate = 30
 
 # Start Recording - Pi Camera V2
 os.mkdir(f"/home/pi/BIRST/videos/{t}")
+os.mkdir(f"/home/pi/BIRST/pictures/{t}")
 print('Starting Recording')
 cam.start_recording(f"/home/pi/BIRST/videos/{t}/{t}.h264")
 print('Recording...')
